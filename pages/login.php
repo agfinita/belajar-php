@@ -30,22 +30,19 @@
                 <!-- form -->
                 <div class="col-md-8 col-lg-6 col-xl-4">
                     <form>
-                        <div class="row d-flex justify-content-center">
-                            <div class="col d-flex justify-content-center">
-                                <p class="lead fw-normal mb-0 me-3"> Sign in with </p>
+                        <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                            <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+                            <button type="button" class="btn btn-primary rounded-circle mx-1">
+                                <i class="fab fa-google"></i>
+                            </button>
 
-                                <button type=button class="btn btn-primary mx-1 rounded-circle">
-                                    <i class="fa-brands fa-google"></i>
-                                </button>
+                            <button type="button" class="btn btn-primary rounded-circle mx-1">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
 
-                                <button type=button class="btn btn-primary mx-1 rounded-circle">
-                                    <i class="fa-brands     fa-twitter"></i>
-                                </button>
-
-                                <button type=button class="btn btn-primary mx-1 rounded-circle">
-                                    <i class="fa-brands fa-linkedin"></i>
-                                </button>
-                            </div>
+                            <button type="button" class="btn btn-primary rounded-circle mx-1">
+                                <i class="fab fa-twitter"></i>
+                            </button>
                         </div>
 
                         <div class="d-flex justify-content-center my-4">
