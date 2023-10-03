@@ -16,27 +16,6 @@ $products = [
     ],
 
     [
-        'image' => '../assets/images/productImage/berrymanuka-2502.jpg',
-        'name' => 'Berry Manuka Americano',
-        'price' => '29.000',
-        'desc' => 'Perpaduan rasa stroberry dan manuka dengan classic blend fore yang menyegarkan'
-    ],
-
-    [
-        'image' => '../assets/images/productImage/cappuccinoiced173.jpg',
-        'name' => 'Iced Cappuccino',
-        'price' => '29.000',
-        'desc' => 'Paduan espresso dengan susu sapi pilihan dan foam tebal di atasnya'
-    ],
-
-    [
-        'image' => '../assets/images/productImage/caramelpralinecoffee173.jpg',
-        'name' => 'Caramel Praline Coffe Ice Blended',
-        'price' => '33.000',
-        'desc' => 'Ice blended latte dengan saus praline dan karamel'
-    ],
-
-    [
         'image' => '../assets/images/productImage/classiclatteiced173.jpg',
         'name' => 'Ice Classic Latte',
         'price' => '24.000',
@@ -51,17 +30,24 @@ $products = [
     ],
 
     [
-        'image' => '../assets/images/productImage/Nutty_Oat_Latte.jpeg',
-        'name' => 'Nutty Oat Latte',
-        'price' => '39.000',
-        'desc' => 'Espresso dari biji kopi khas nusantara dipadukan susu oat gluten-free dan sensasi nutty dari huzelnut'
+        'image' => '../assets/images/productImage/berrymanuka-2502.jpg',
+        'name' => 'Berry Manuka Americano',
+        'price' => '29.000',
+        'desc' => 'Perpaduan rasa stroberry dan manuka dengan classic blend fore yang menyegarkan'
     ],
 
     [
-        'image' => '../assets/images/productImage/salted-caramel173.jpg',
-        'name' => 'Iced Salted Caramel Mocha',
+        'image' => '../assets/images/productImage/cappuccinoiced173.jpg',
+        'name' => 'Iced Cappuccino',
+        'price' => '29.000',
+        'desc' => 'Paduan espresso dengan susu sapi pilihan dan foam tebal di atasnya yang menambah kelezatan rasanya'
+    ],
+
+    [
+        'image' => '../assets/images/productImage/caramelpralinecoffee173.jpg',
+        'name' => 'Caramel Praline Coffe Ice Blended',
         'price' => '33.000',
-        'desc' => 'Perpaduan coklat, latte dari house blend fore dan gurihnya caramel'
+        'desc' => 'Ice blended latte dengan saus praline dan karamel yang gurih'
     ],
 
     [
@@ -76,6 +62,13 @@ $products = [
         'name' => 'Ice Salted Caramel Mocha',
         'price' => '33.000',
         'desc' => 'Perpaduan coklat, latte dari house blend fore dan gurihnya caramel'
+    ],
+
+    [
+        'image' => '../assets/images/productImage/Nutty_Oat_Latte.jpeg',
+        'name' => 'Nutty Oat Latte',
+        'price' => '39.000',
+        'desc' => 'Espresso dari biji kopi khas nusantara dipadukan susu oat gluten-free dan sensasi nutty dari huzelnut'
     ],
 ];
 ?>
@@ -108,7 +101,7 @@ $products = [
             <section class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../index.php"> Home </a>
+                        <a class="nav-link active" aria-current="page" href="login.php"> Home </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#product-list"> Product </a>
