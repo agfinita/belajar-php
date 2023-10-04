@@ -21,11 +21,13 @@
 </head>
 
 <body>
-    <section class="position-relative m-5">
-        <div class="container border shadow-lg">
+    <section class="container d-flex justify-content-center align-items-center mt-3">
+        <div class=" shadow-lg my-4">
             <div class="row d-flex justify-content-center align-items-center p-4">
+                <p class="fw-bold fs-3 text-center"> Hi! Welcome to Fore Coffe  </p>
+                
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="../assets/images/books.jpg" class="img-fluid" alt="book_login">
+                    <img src="../assets/images/coffe_logo.jpg" class="img-fluid" alt="book_login">
                 </div>
                 <!-- form -->
                 <div class="col-md-8 col-lg-6 col-xl-4">
@@ -51,14 +53,12 @@
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="formEmail" class="form-control form-control-lg" placeholder="Enter a valid email address" />
-                            <label class="form-label" for="formEmail">Email address</label>
+                            <input type="email" id="formEmail" class="form-control form-control-lg" placeholder="Enter Email" />
                         </div>
 
                         <!-- Password input -->
                         <div class="form-outline mb-3">
                             <input type="password" id="formPassword" class="form-control form-control-lg" placeholder="Enter password" />
-                            <label class="form-label" for="formPassword">Password</label>
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">
