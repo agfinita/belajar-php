@@ -1,5 +1,21 @@
 <?php
 
+if (isset($_POST['login'])) {
+    // menangkap email dan password
+    $mail   = $_POST['formEmail'];
+    $pass   = $_POST['formPassword'];
+
+    // menetapkan email dan password
+    if ($mail == "admin@gmail.com" && $pass == "admin123") {
+        header("Location: dashboard.php");
+    } elseif ($mail == null || $pass == null) {
+        $nul    = true;
+    } else {
+        // error handling
+        $error  = true;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -21,17 +37,17 @@
 </head>
 
 <body>
-    <section class="container d-flex justify-content-center align-items-center mt-3">
+    <section class="container d-flex justify-content-center align-items-center mt-2">
         <div class=" shadow-lg my-4">
             <div class="row d-flex justify-content-center align-items-center p-4">
-                <p class="fw-bold fs-3 text-center"> Hi! Welcome to Fore Coffe  </p>
-                
+                <p class="fw-bold fs-3 text-center"> Hi! Welcome to Fore Coffe </p>
+
                 <div class="col-md-9 col-lg-6 col-xl-5">
                     <img src="../assets/images/coffe_logo.jpg" class="img-fluid" alt="book_login">
                 </div>
                 <!-- form -->
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <form action="product.php" method="get" name="form-login">
+                    <form action="" method="POST" name="form-login">
                         <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
                             <p class="lead fw-normal mb-0 me-3">Sign in with</p>
                             <button type="button" class="btn btn-primary rounded-circle mx-1">
@@ -53,12 +69,21 @@
 
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="formEmail" class="form-control form-control-lg" placeholder="Enter Email" />
+                            <input type="email" name="formEmail" id="formEmail" class="form-control form-control-lg" placeholder="Enter Email" />
                         </div>
 
                         <!-- Password input -->
                         <div class="form-outline mb-3">
-                            <input type="password" id="formPassword" class="form-control form-control-lg" placeholder="Enter password" />
+                            <input type="password" name="formPassword" id="formPassword" class="form-control form-control-lg" placeholder="Enter password" />
+
+                            <!-- handling message -->
+                            <?php if (isset($nul)) : ?>
+                                <small class="text-danger">please complete the field first</small>
+                            <?php endif; ?>
+
+                            <?php if (isset($error)) : ?>
+                                <small class="text-danger">wrong email or password</small>
+                            <?php endif; ?>
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">
@@ -72,8 +97,9 @@
                             <a href="#!" class="text-body text-decoration-none">Forgot password?</a>
                         </div>
 
-                        <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                        <div class="text-center text-lg-start mt-3 pt-2">
+                            <!-- button -->
+                            <button type="submit" name="login" value="login" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
 
                             <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!" class="link-danger text-decoration-none">Register</a></p>
                         </div>
