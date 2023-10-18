@@ -2,141 +2,24 @@
 include 'koneksi.php'
 ?>
 
-<?php
-// create an array to list product
-$products = [
-  [
-    'image' => '../../assets/images/productImage/americanohot173.jpg',
-    'name' => 'Hot Americano',
-    'category' => '2',
-    'price' => '21.000',
-    'desc' => 'Espresso shot dalam segelas cup dengan menjaga ketebalan rasa kopinya',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/americanoiced173.jpg',
-    'name' => 'Ice Americano',
-    'category' => '2',
-    'price' => '21.000',
-    'desc' => 'Espresso shot dalam segelas cup dengan menjaga ketebalan rasa kopinya',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/classiclatteiced173.jpg',
-    'name' => 'Ice Classic Latte',
-    'category' => '2',
-    'price' => '24.000',
-    'desc' => 'Perpaduan rasa espresso premium dengan saus krim spesial fore',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/matchablended173.jpg',
-    'name' => 'Matcha Ice Blended',
-    'category' => '2',
-    'price' => '24.000',
-    'desc' => 'Perpaduan creamy matcha khas fore coffe, susu segar dengan es',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/berrymanuka-2502.jpg',
-    'name' => 'Berry Manuka Americano',
-    'category' => '2',
-    'price' => '29.000',
-    'desc' => 'Perpaduan rasa stroberry dan manuka dengan classic blend fore yang menyegarkan',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/cappuccinoiced173.jpg',
-    'name' => 'Iced Cappuccino',
-    'category' => '2',
-    'price' => '29.000',
-    'desc' => 'Paduan espresso dengan susu sapi pilihan dan foam tebal di atasnya yang menambah kelezatan rasanya',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/caramelpralinecoffee173.jpg',
-    'name' => 'Caramel Praline Coffe Ice Blended',
-    'category' => '2',
-    'price' => '33.000',
-    'desc' => 'Ice blended latte dengan saus praline dan karamel yang gurih',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/salted-caramel173.jpg',
-    'name' => 'Hot Salted Caramel Mocha',
-    'category' => '2',
-    'price' => '33.000',
-    'desc' => 'Perpaduan coklat, latte dari house blend fore dan gurihnya caramel',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/saltedcarameliced173.jpg',
-    'name' => 'Ice Salted Caramel Mocha',
-    'category' => '2',
-    'price' => '33.000',
-    'desc' => 'Perpaduan coklat, latte dari house blend fore dan gurihnya caramel yang dingin',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/Nutty_Oat_Latte.jpeg',
-    'name' => 'Nutty Oat Latte',
-    'category' => '2',
-    'price' => '39.000',
-    'desc' => 'Espresso dari biji kopi khas nusantara dipadukan susu oat gluten-free dan sensasi nutty dari huzelnut',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-];
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin | Product</title>
+  <title>Admin | CRUD Product</title>
 
   <!--favicon-->
   <link rel="icon" type="image/png" href="../../assets/images/icons8-cat-64.png" />
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css" />
-  <!-- jsGrid -->
-  <link rel="stylesheet" href="../../assets/plugins/jsgrid/jsgrid.min.css" />
-  <link rel="stylesheet" href="../../assets/plugins/jsgrid/jsgrid-theme.min.css" />
-  <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
   <!-- Theme style -->
   <link rel="stylesheet" href="../../assets/dist/css/adminlte.min.css" />
 </head>
@@ -351,13 +234,13 @@ $products = [
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="general.php" class="nav-link">
+                  <a href="general.php" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
                     <p>CRUD Product</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="jsgrid.php" class="nav-link active">
+                  <a href="jsgrid.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Data Product</p>
                   </a>
@@ -425,14 +308,12 @@ $products = [
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Product</h1>
+              <h1>Product Data</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                  <a href="#">Home</a>
-                </li>
-                <li class="breadcrumb-item active">Product</li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Product Data</li>
               </ol>
             </div>
           </div>
@@ -440,88 +321,251 @@ $products = [
         <!-- /.container-fluid -->
       </section>
 
+      <?php
+      // inisiasi variable
+      $title    = "";
+      $category = "";
+      $price    = "";
+      $desc     = "";
+      $disc     = "";
+      $unit     = "";
+      $stock    = "";
+
+      if (isset($_GET['op'])) {   // digunakan untuk menangkap isi op
+        $op = $_GET['op'];
+      } else {
+        $op = "";
+      }
+
+      // CRUD - Delete data
+      if ($op == 'delete') {
+        $id = $_GET['id'];
+        $query6 = "DELETE FROM products WHERE id = $id";
+        $query_delete = mysqli_query($connection, $query6);
+        if ($query_delete) {
+          $success = "Data berhasil dihapus";
+        } else {
+          $error = "Data gagal dihapus";
+        }
+      }
+
+      if ($op == 'edit') {
+        $id = $_GET['id'];
+        // SQL query untuk menampilkan data yang akan diupdate
+        $query4 = "SELECT product_name, category_id, price, description, discount_amount, unit, stock
+                   FROM products WHERE id = $id";
+        $query_edit = mysqli_query($connection, $query4);
+        $data       = mysqli_fetch_array($query_edit);
+
+        if ($data) {
+          $title      = $data['product_name'];
+          $category   = $data['category_id'];
+          $price      = $data['price'];
+          $desc       = $data['description'];
+          $disc       = $data['discount_amount'];
+          $unit       = $data['unit'];
+          $stock      = $data['stock'];
+        } else {
+          $error = "Data tidak ditemukan";
+        }
+      }
+
+      // CRUD - Create data
+      if (isset($_POST['simpan'])) {
+        // menangkap input dari user
+        $title    = $_POST['inputTitle'];
+        $category = $_POST['inputCategory'];
+        $price    = $_POST['inputPrice'];
+        $desc     = $_POST['inputDesc'];
+        $disc     = $_POST['inputDisc'];
+        $unit     = $_POST['inputUnit'];
+        $stock    = $_POST['inputStock'];
+
+        if (!empty($title) && $category && $category !== "0" && !empty($price) && !empty($desc) && !empty($disc) && !empty($unit) && !empty($stock)) {
+          // CRUD - Update data
+          if ($op == 'edit') {    //condition for edit data
+            // SQL query untuk mengupdate data ke table products
+            $query5 = "UPDATE products SET
+            product_name    = '$title',
+            category_id     = '$category',
+            price           = '$price',
+            description     = '$desc',
+            discount_amount = '$disc',
+            unit            = '$unit',
+            stock           = '$stock'
+            WHERE id = $id";
+            // eksekusi data yang akan diupdate
+            $query_edit     = mysqli_query($connection, $query5);
+            if ($query_edit) {
+              $success  = "Berhasil update data";
+            } else {
+              $error    = "Gagal update data";
+            }
+          } else {    //condition for edit data
+            // SQL query untuk memasukkan data ke table products
+            $query1 = "INSERT INTO products (
+              product_name,category_id, price, description, discount_amount, unit, stock)
+              VALUES 
+              ('$title', '$category', '$price', '$desc', '$disc', '$unit', '$stock')";
+            // eksekusi data yang diinsert
+            $query_create = mysqli_query($connection, $query1);
+            if ($query_create) {
+              $success = "Berhasil memasukkan data";
+            } else {
+              $error = "Gagal memasukkan data: " . mysqli_error($connection);
+            }
+          }
+        } else {
+          $error = "Silahkan lengkapi semua data!";
+        }
+      }
+      ?>
+
       <!-- Main content -->
       <section class="content">
-        <div class="card card-blue">
-          <div class="card-header">
-            <h3 class="card-title">Products</h3>
-          </div>
-          <!-- /.card-header -->
+        <div class="container-fluid">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Form Add Data Product</h3>
+                </div>
+                <!-- /.card-header -->
 
-          <div>
-            <!-- listing product will display in here -->
-            <section class="container-fluid">
-              <section class=" mx-3 mt-5" id="product-list">
-                <section class="row row-cols-1 row-cols-md-2 g-2">
-                  <!-- START CRUD - read product -->
+                <!-- notifikasi form handle -->
+                <?php if (isset($success)) : ?>
+                  <div class="alert alert-success" role="alert"> <!-- notif success -->
+                    <?php echo $success ?>
+                  </div>
+                <?php endif; ?>
+
+                <?php if (isset($error)) : ?>
+                  <div class="alert alert-danger" role="alert"> <!-- notif failed-->
+                    <?php echo $error ?>
+                  </div>
+                <?php endif; ?>
+
+                <!-- form start -->
+                <form action="" method="POST">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="inputTitle">Product Name</label>
+                      <input type="text" class="form-control" id="inputTitle" name="inputTitle" value="<?php echo $title ?>" placeholder="Enter name of product" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputCategory">Category Product</label></br>
+                      <select class="form-select" aria-label="Default select example" id="inputCategory" name="inputCategory">
+                        <option value="0"> Select Category </option>
+                        <option value="1" <?php if ($category == "1") echo "selected" ?>>Category 1</option>
+                        <option value="2" <?php if ($category == "2") echo "selected" ?>>Category 2</option>
+                        <option value="3" <?php if ($category == "3") echo "selected" ?>>Category 3</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputPrice">Price</label>
+                      <input type="text" class="form-control" id="inputPrice" name="inputPrice" value="<?php echo $price ?>" placeholder="Enter price of product" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputDesc">Description</label>
+                      <input type="text" class="form-control" id="inputDesc" name="inputDesc" value="<?php echo $desc ?>" placeholder="Enter description of product" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputDisc">Discount</label>
+                      <input type="text" class="form-control" id="inputDisc" name="inputDisc" value="<?php echo $disc ?>" placeholder="Enter discount of product" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputUnit">Unit Product</label>
+                      <input type="text" class="form-control" id="inputUnit" name="inputUnit" value="<?php echo $unit ?>" placeholder="Enter unit product" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputStock">Stock Product</label>
+                      <input type="text" class="form-control" id="inputStock" name="inputStock" value="<?php echo $stock ?>" placeholder="Enter stock of product" />
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button type="submit" name="simpan" value="simpan" class="btn btn-success">
+                      Simpan
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card -->
+
+              <!-- Table update and delete -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Edit / Delete Data Product</h3>
+                </div>
+                <!-- Start table to show product data -->
+                <table class="table table-striped">
+                  <thead>
+                    <tr class="text-center">
+                      <th scope="col">No</th>
+                      <th scope="col">Product Name</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Discount</th>
+                      <th scope="col">Unit</th>
+                      <th scope="col">Stock</th>
+                      <th scope="col">Aksi</th>
+                    </tr>
+                  </thead>
+
                   <?php
-                  // variable untuk select data dari database
-                  $query2     = "SELECT product_name, category_id, price, description, discount_amount, unit, stock
-                                 FROM products ORDER BY id ASC";
-                  $query_read = mysqli_query($connection, $query2);
+                  $query3 = "SELECT id, product_name, category_id, price, description, discount_amount, unit, stock FROM products ORDER BY id ASC";
+                  $query_update = mysqli_query($connection, $query3);
+                  $nomor   = 1; //inisiasi untuk memberi nomor data
                   ?>
-                  <!-- menampilkan data menggunakan while loop -->
-                  <?php while ($data = mysqli_fetch_array($query_read)) : ?>
-                    <section class="col">
-                      <section class="card mb-3 p-2 " style="max-width: 550px;">
-                        <section class="row g-0">
-                          <section class="col-md-8">
-                            <section class="card-body">
-                              <picture>
-                                <image alt="opsional_picture_product" class="mb-3 img-fluid rounder-start"></image>
-                              </picture><br>
-                              <h5 class="card-title"><strong> <?php echo $title          = $data['product_name']; ?> </strong></h5>
-                              <p class="card-text"> <?php echo 'Category ' . $category   = $data['category_id']; ?> </p>
-                              <p class="card-text text-warning-emphasis"><strong> <?php echo 'Rp' . $price = $data['price']; ?> </strong></p>
-                              <p class="card-text"> <?php echo $desc                     = $data['description']; ?> </p>
-                              <p class="card-text"> <?php echo 'Discount: ' . $disc      = $data['discount_amount']; ?> </p>
-                              <p class="card-text"> <?php echo $unit                     = $data['unit']; ?> </p>
-                              <p class="card-text"> <?php echo 'Stock: ' . $stock        = $data['stock']; ?> </p>
-                              <button type="button" class="btn btn-primary"> <?php echo 'Buy Now'; ?> </button>
-                            </section>
-                          </section>
-                        </section>
-                      </section>
-                    </section>
-                  <?php endwhile; ?>
-                  <!-- END CRUD - read product -->
 
-                  <!-- use array to load product -->
-                  <?php foreach ($products as $product) : ?>
-                    <section class="col">
-                      <section class="card mb-3 p-2 " style="max-width: 550px;">
-                        <section class="row g-0">
-                          <section class="col-md-8">
-                            <section class="card-body">
-                              <picture>
-                                <!-- image product -->
-                                <img src="<?php echo $product['image']; ?>" alt="product_image" class="mb-3 img-fluid rounder-start" alt="product-coffe">
-                              </picture>
-                              <h5 class="card-title"><strong> <?php echo $product['name']; ?> </strong></h5>
-                              <p class="card-text"> <?php echo 'Category: ' . $product['category']; ?> </p>
-                              <p class="card-text text-warning-emphasis"><strong> <?php echo 'Rp' . $product['price']; ?> </strong></p>
-                              <p class="card-text"> <?php echo $product['desc']; ?> </p>
-                              <p class="card-text"> <?php echo 'Discount: ' . $product['disc']; ?> </p>
-                              <p class="card-text"> <?php echo $product['unit']; ?> </p>
-                              <p class="card-text"> <?php echo 'Stock: ' . $product['stock']; ?> </p>
-                              <button type="button" class="btn btn-primary"> <?php echo 'Buy Now'; ?> </button>
-                            </section>
-                          </section>
-                        </section>
-                      </section>
-                    </section>
-                  <?php endforeach; ?>
-                </section>
-              </section>
-            </section>
+                  <tbody>
+                    <?php while ($data = mysqli_fetch_array($query_update)) : ?>
+                      <tr class="text-center">
+                        <th scope="row"> <?php echo $nomor++ ?> </th>
+                        <td scope="row"> <?php echo $title = $data['product_name']; ?> </td>
+                        <td scope="row"> <?php echo $category  = $data['category_id']; ?> </td>
+                        <td scope="row"> <?php echo 'Rp' . $price = $data['price']; ?> </td>
+                        <td scope="row"> <?php echo $desc = $data['description']; ?> </td>
+                        <td scope="row"> <?php echo $disc  = $data['discount_amount']; ?> </td>
+                        <td scope="row"> <?php echo $unit  = $data['unit']; ?> </td>
+                        <td scope="row"> <?php echo $stock  = $data['stock']; ?> </td>
+
+                        <?php $id = $data['id'] ?>
+                        <td scope="row">
+                          <a href="general.php?op=edit&id=<?php echo $id ?>">
+                            <button type="button" class="btn btn-warning">Edit</button>
+                          </a>
+
+                          <a href="general.php?op=delete&id=<?php echo $id ?>" onclick="return confirm('Yakin hapus data?')">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                          </a>
+                        </td>
+                      </tr>
+                    <?php endwhile; ?>
+                  </tbody>
+                </table>
+                <!-- End table product -->
+              </div>
+              <!-- End table update and delete -->
+            </div>
+            <!-- /.row -->
           </div>
-        </div>
-        <!-- /.card -->
+          <!-- /.container-fluid -->
       </section>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
+    <footer class=" main-footer">
       <div class="float-right d-none d-sm-block"><b>Version</b> 3.2.0</div>
       <strong>Copyright &copy; 2014-2021
         <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
@@ -540,16 +584,21 @@ $products = [
   <script src="../../assets/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- jsGrid -->
-  <script src="../../assets/plugins/jsgrid/demos/db.js"></script>
-  <script src="../../assets/plugins/jsgrid/jsgrid.min.js"></script>
+  <!-- bs-custom-file-input -->
+  <script src="../../assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../assets/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../assets/dist/js/demo.js"></script>
   <!-- Page specific script -->
-  <script src="../../assets/bootstrap/js/bootstrap.min.js">
+  <script>
+    $(function() {
+      bsCustomFileInput.init();
+    });
   </script>
+
+  <!-- javascript -->
+  <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
