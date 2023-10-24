@@ -1,4 +1,5 @@
 <?php
+include '../tables/koneksi.php';
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +8,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin | Enhanced Search Form</title>
+  <title>Admin | Search</title>
 
   <!--favicon-->
   <link rel="icon" type="image/png" href="../../assets/images/icons8-cat-64.png" />
@@ -203,8 +204,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+            <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -220,11 +220,29 @@
                     <p>Dashboard</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="../login.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Login</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../productVariable.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product Variable</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../productArray.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product Array</p>
+                  </a>
+                </li>
               </ul>
             </li>
 
             <li class="nav-item">
-              <a href="#" class="nav-link active">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
                   Tables
@@ -233,9 +251,21 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
+                  <a href="../tables/product.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="../tables/general.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>CRUD Product</p>
+                    <p>Create Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../tables/update.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Table Product</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -287,7 +317,7 @@
                 <li class="nav-item">
                   <a href="enhanced.php" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Enhanced</p>
+                    <p>Cari Data Product</p>
                   </a>
                 </li>
               </ul>
@@ -299,52 +329,71 @@
       <!-- /.sidebar -->
     </aside>
 
-    <!-- Content Wrapper. Contains page content -->
+    <?php
+    // $query_product  = "SELECT product_name, category_id, price, description, discount_amount, unit, stock
+    //                   FROM products
+    //                   ORDER BY id DESC";
+    // $query_read     = mysqli_query($connection, $query_product);
+    // Menampilkan data dari database
+    $query2     = " SELECT product_name, category_id, price, description, discount_amount, unit, stock
+                    FROM products ORDER BY id DESC";
+    $query_read = mysqli_query($connection, $query2);
+
+    //  Feat searching
+    if (isset($_GET['searchButton'])) {
+      $keyword    = ($_GET['inputKeyword']);
+      $query_cari = "SELECT product_name, category_id, price, description, discount_amount, unit, stock
+                                    FROM products WHERE
+                                    product_name LIKE '%$keyword%' OR
+                                    category_id LIKE '%$keyword%' OR
+                                    description LIKE '%$keyword%' ";
+      $query_read     = mysqli_query($connection, $query_cari);
+    } else {
+      // default apabila tidak ada data yang dicari
+      $query_read     = mysqli_query($connection, $query2);
+    }
+    ?>
+
+    <!-- Content wrapper -->
     <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Search Product</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item">
+                  <a href="#">Home</a>
+                </li>
+                <li class="breadcrumb-item active">Search Product</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <!-- /.Container-fluid -->
+      </section>
+
       <!-- Main content -->
       <section class="content">
-        <div class="container-fluid">
-          <h2 class="text-center display-4">Enhanced Search</h2>
-          <form action="enhanced-results.php">
+        <!-- start input feat searching -->
+        <div>
+          <form action="" method="GET">
             <div class="row">
-              <div class="col-md-10 offset-md-1">
+              <div class="col-md-10">
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-5">
                     <div class="form-group">
-                      <label>Result Type:</label>
-                      <select class="select2" multiple="multiple" data-placeholder="Any" style="width: 100%">
-                        <option>Text only</option>
-                        <option>Images</option>
-                        <option>Video</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-3">
-                    <div class="form-group">
-                      <label>Sort Order:</label>
-                      <select class="select2" style="width: 100%">
-                        <option selected>ASC</option>
-                        <option>DESC</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-3">
-                    <div class="form-group">
-                      <label>Order By:</label>
-                      <select class="select2" style="width: 100%">
-                        <option selected>Title</option>
-                        <option>Date</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-                    <input type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="Lorem ipsum" />
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-lg btn-default">
-                        <i class="fa fa-search"></i>
-                      </button>
+                      <div class="input-group input-group">
+                        <input type="search" class="form-control" id="inputKeyword" name="inputKeyword" value="<?php echo isset($keyword) ? $keyword : ''; ?>" placeholder="Type your keywords here" autofocus autocomplete="off" />
+                        <div class="input-group-append">
+                          <button type="submit" name="searchButton" class="btn btn btn-default">
+                            <i class="fa fa-search"></i>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -352,8 +401,52 @@
             </div>
           </form>
         </div>
+        <!-- end input feat searcing -->
+
+        <div class="card card-blue">
+          <div class="card-header">
+            <h3 class="card-title">Search Product</h3>
+          </div>
+          <!--  /.card-header -->
+
+          <section class="container-fluid">
+            <section class=" mx-3 mt-4" id="product-list">
+              <section class="row row-cols-1 row-cols-md-2 g-2">
+
+                <!-- START CRUD - read product -->
+                <?php while ($data = mysqli_fetch_array($query_read)) : ?> <!-- Menampilkan data menggunakan while loop -->
+
+                  <section class="col">
+                    <section class="card mb-3 p-2 " style="max-width: 550px;">
+                      <section class="row g-0">
+                        <section class="col-md-8">
+                          <section class="card-body">
+                            <picture>
+                              <image alt="opsional_picture_product" class="mb-3 img-fluid rounder-start"></image>
+                            </picture><br>
+                            <h5 class="card-title"><strong> <?php echo $title          = $data['product_name']; ?> </strong></h5>
+                            <p class="card-text"> <?php echo 'Category ' . $category   = $data['category_id']; ?> </p>
+                            <p class="card-text text-warning-emphasis"><strong> <?php echo 'Rp' . $price = $data['price']; ?> </strong></p>
+                            <p class="card-text"> <?php echo $desc                     = $data['description']; ?> </p>
+                            <p class="card-text"> <?php echo 'Discount: ' . $disc      = $data['discount_amount']; ?> </p>
+                            <p class="card-text"> <?php echo $unit                     = $data['unit']; ?> </p>
+                            <p class="card-text"> <?php echo 'Stock: ' . $stock        = $data['stock']; ?> </p>
+                            <button type="button" class="btn btn-primary"> <?php echo 'Buy Now'; ?> </button>
+                          </section>
+                        </section>
+                      </section>
+                    </section>
+                  </section>
+                <?php endwhile; ?>
+                <!-- END CRUD - read product -->
+              </section>
+            </section>
+          </section>
+        </div>
       </section>
+      <!-- .content -->
     </div>
+    <!-- /. content wrapper -->
 
     <footer class="main-footer">
       <div class="float-right d-none d-sm-block"><b>Version</b> 3.2.0</div>

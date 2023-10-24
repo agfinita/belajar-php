@@ -1,4 +1,121 @@
 <?php
+include 'koneksi.php'
+?>
+
+<?php
+// create an array to list product
+$products = [
+    [
+        'image' => '../../assets/images/productImage/americanohot173.jpg',
+        'name' => 'Hot Americano',
+        'category' => '2',
+        'price' => '21.000',
+        'desc' => 'Espresso shot dalam segelas cup dengan menjaga ketebalan rasa kopinya',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+
+    [
+        'image' => '../../assets/images/productImage/americanoiced173.jpg',
+        'name' => 'Ice Americano',
+        'category' => '2',
+        'price' => '21.000',
+        'desc' => 'Espresso shot dalam segelas cup dengan menjaga ketebalan rasa kopinya',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+
+    [
+        'image' => '../../assets/images/productImage/classiclatteiced173.jpg',
+        'name' => 'Ice Classic Latte',
+        'category' => '2',
+        'price' => '24.000',
+        'desc' => 'Perpaduan rasa espresso premium dengan saus krim spesial fore',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+
+    [
+        'image' => '../../assets/images/productImage/matchablended173.jpg',
+        'name' => 'Matcha Ice Blended',
+        'category' => '2',
+        'price' => '24.000',
+        'desc' => 'Perpaduan creamy matcha khas fore coffe, susu segar dengan es',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+
+    [
+        'image' => '../../assets/images/productImage/berrymanuka-2502.jpg',
+        'name' => 'Berry Manuka Americano',
+        'category' => '2',
+        'price' => '29.000',
+        'desc' => 'Perpaduan rasa stroberry dan manuka dengan classic blend fore yang menyegarkan',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+
+    [
+        'image' => '../../assets/images/productImage/cappuccinoiced173.jpg',
+        'name' => 'Iced Cappuccino',
+        'category' => '2',
+        'price' => '29.000',
+        'desc' => 'Paduan espresso dengan susu sapi pilihan dan foam tebal di atasnya yang menambah kelezatan rasanya',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+
+    [
+        'image' => '../../assets/images/productImage/caramelpralinecoffee173.jpg',
+        'name' => 'Caramel Praline Coffe Ice Blended',
+        'category' => '2',
+        'price' => '33.000',
+        'desc' => 'Ice blended latte dengan saus praline dan karamel yang gurih',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+
+    [
+        'image' => '../../assets/images/productImage/salted-caramel173.jpg',
+        'name' => 'Hot Salted Caramel Mocha',
+        'category' => '2',
+        'price' => '33.000',
+        'desc' => 'Perpaduan coklat, latte dari house blend fore dan gurihnya caramel',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+
+    [
+        'image' => '../../assets/images/productImage/saltedcarameliced173.jpg',
+        'name' => 'Ice Salted Caramel Mocha',
+        'category' => '2',
+        'price' => '33.000',
+        'desc' => 'Perpaduan coklat, latte dari house blend fore dan gurihnya caramel yang dingin',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+
+    [
+        'image' => '../../assets/images/productImage/Nutty_Oat_Latte.jpeg',
+        'name' => 'Nutty Oat Latte',
+        'category' => '2',
+        'price' => '39.000',
+        'desc' => 'Espresso dari biji kopi khas nusantara dipadukan susu oat gluten-free dan sensasi nutty dari huzelnut',
+        'disc' => '0.0',
+        'unit' => 'PCS',
+        'stock' => '3'
+    ],
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -7,40 +124,25 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Admin | Dashboard</title>
+    <title>Admin | Product</title>
 
     <!--favicon-->
-    <link rel="icon" type="image/png" href="../assets/images/icons8-cat-64.png" />
+    <link rel="icon" type="image/png" href="../../assets/images/icons8-cat-64.png" />
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css" />
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="../assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
-    <!-- iCheck -->
-    <link rel="stylesheet" href="../assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="../assets/plugins/jqvmap/jqvmap.min.css" />
+    <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css" />
+    <!-- jsGrid -->
+    <link rel="stylesheet" href="../../assets/plugins/jsgrid/jsgrid.min.css" />
+    <link rel="stylesheet" href="../../assets/plugins/jsgrid/jsgrid-theme.min.css" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <!-- Theme style -->
-    <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css" />
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="../assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css" />
-    <!-- summernote -->
-    <link rel="stylesheet" href="../assets/plugins/summernote/summernote-bs4.min.css" />
+    <link rel="stylesheet" href="../../assets/dist/css/adminlte.min.css" />
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="../assets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
-        </div>
-
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -90,7 +192,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../assets/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle" />
+                                <img src="../../assets/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle" />
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Brad Diesel
@@ -108,7 +210,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../assets/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
+                                <img src="../../assets/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
@@ -126,7 +228,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="../assets/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
+                                <img src="../../assets/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3" />
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
@@ -177,7 +279,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
@@ -189,16 +291,16 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
+                <img src="../../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
                 <span class="brand-text font-weight-light">Admin Store</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
+                <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../assets/images/profile_2.jpg" class="img-circle elevation-2" alt="User Image" />
+                        <img src="../../assets/images/profile_2.jpg" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Agfinita Gusti Hikmawani</a>
@@ -221,8 +323,8 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -231,25 +333,25 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="dashboard.php" class="nav-link active">
+                                    <a href="../dashboard.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Dashboard</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="login.php" class="nav-link">
+                                    <a href="../login.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Login</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="productVariable.php" class="nav-link">
+                                    <a href="../productVariable.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Product Variable</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="productArray.php" class="nav-link">
+                                    <a href="../productArray.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Product Array</p>
                                     </a>
@@ -257,8 +359,8 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Tables
@@ -267,34 +369,35 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="tables/product.php" class="nav-link">
+                                    <a href="product.php" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Product</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="tables/general.php" class="nav-link">
+                                    <a href="general.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Create Product</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="tables/update.php" class="nav-link">
+                                    <a href="update.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Table Product</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="tables/jsgrid.php" class="nav-link">
+                                    <a href="jsgrid.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Data Product</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
                         <li class="nav-header">OTHERS</li>
                         <li class="nav-item">
-                            <a href="calendar.php" class="nav-link">
+                            <a href="../calendar.php" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
                                     Calendar
@@ -313,7 +416,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../pages/examples/contacts.php" class="nav-link">
+                                    <a href="../examples/contacts.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Contacts</p>
                                     </a>
@@ -331,7 +434,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../pages/search/enhanced.php" class="nav-link">
+                                    <a href="../search/enhanced.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Cari Data Product</p>
                                     </a>
@@ -348,115 +451,78 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <div class="content-header">
+            <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Dashboard</h1>
+                            <h1>Product</h1>
                         </div>
-                        <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item">
                                     <a href="#">Home</a>
                                 </li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Product</li>
                             </ol>
                         </div>
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
                 </div>
                 <!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
-
-            <!-- Memanggil koneksi database -->
-            <?php include 'tables/koneksi.php'
-            ?>
-
-            <?php
-            // Menghitung record data tabel products
-            $query_product  = "SELECT COUNT(*) AS product_count FROM products ";
-            $productCount   = mysqli_query($connection, $query_product);
-            $productCount   = mysqli_fetch_assoc($productCount);
-
-            // Menghitung record data tabel users
-            $query_users    = "SELECT COUNT(*) AS users_count FROM users ";
-            $usersCount     = mysqli_query($connection, $query_users);
-            $usersCount     = mysqli_fetch_assoc($usersCount);
-
-            // Menghitung record data tabel vendors
-            $query_vendors  = " SELECT COUNT(*) AS vendors_count FROM vendors ";
-            $vendorsCount   = mysqli_query($connection, $query_vendors);
-            $vendorsCount   = mysqli_fetch_assoc($vendorsCount);
-            ?>
+            </section>
 
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-4 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3> <?php echo $productCount['product_count']; ?> </h3>
-
-                                    <p>Products</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-4 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <h3><?php echo $usersCount['users_count']; ?></h3>
-
-                                    <p>Customers</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-4 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-warning">
-                                <div class="inner">
-                                    <h3><?php echo $vendorsCount['vendors_count']; ?></h3>
-
-                                    <p>Vendors</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-person-add"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
+                <div class="card card-blue">
+                    <div class="card-header">
+                        <h3 class="card-title">Products</h3>
                     </div>
-                    <!-- /.row -->
+                    <!-- /.card-header -->
+
+                    <div>
+                        <!-- listing product will display in here -->
+                        <section class="container-fluid">
+                            <section class=" mx-3 mt-5" id="product-list">
+                                <section class="row row-cols-1 row-cols-md-2 g-2">
+                                    <!-- use array to load product -->
+                                    <?php foreach ($products as $product) : ?>
+                                        <section class="col">
+                                            <section class="card mb-3 p-2 " style="max-width: 550px;">
+                                                <section class="row g-0">
+                                                    <section class="col-md-8">
+                                                        <section class="card-body">
+                                                            <picture>
+                                                                <!-- image product -->
+                                                                <img src="<?php echo $product['image']; ?>" alt="product_image" class="mb-3 img-fluid rounder-start" alt="product-coffe">
+                                                            </picture>
+                                                            <h5 class="card-title"><strong> <?php echo $product['name']; ?> </strong></h5>
+                                                            <p class="card-text"> <?php echo 'Category: ' . $product['category']; ?> </p>
+                                                            <p class="card-text text-warning-emphasis"><strong> <?php echo 'Rp' . $product['price']; ?> </strong></p>
+                                                            <p class="card-text"> <?php echo $product['desc']; ?> </p>
+                                                            <p class="card-text"> <?php echo 'Discount: ' . $product['disc']; ?> </p>
+                                                            <p class="card-text"> <?php echo $product['unit']; ?> </p>
+                                                            <p class="card-text"> <?php echo 'Stock: ' . $product['stock']; ?> </p>
+                                                            <button type="button" class="btn btn-primary"> <?php echo 'Buy Now'; ?> </button>
+                                                        </section>
+                                                    </section>
+                                                </section>
+                                            </section>
+                                        </section>
+                                    <?php endforeach; ?>
+                                </section>
+                            </section>
+                        </section>
+                    </div>
                 </div>
-                <!-- /.container-fluid -->
+                <!-- /.card -->
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
+            <div class="float-right d-none d-sm-block"><b>Version</b> 3.2.0</div>
             <strong>Copyright &copy; 2014-2021
                 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
             All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.2.0
-            </div>
         </footer>
 
         <!-- Control Sidebar -->
@@ -468,39 +534,19 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="../assets/plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="../assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge("uibutton", $.ui.button);
-    </script>
+    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="../assets/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="../assets/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="../assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="../assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="../assets/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="../assets/plugins/moment/moment.min.js"></script>
-    <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="../assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="../assets/plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="../assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="../../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jsGrid -->
+    <script src="../../assets/plugins/jsgrid/demos/db.js"></script>
+    <script src="../../assets/plugins/jsgrid/jsgrid.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="../assets/dist/js/adminlte.js"></script>
+    <script src="../../assets/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../assets/dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="../assets/dist/js/pages/dashboard.js"></script>
+    <script src="../../assets/dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script src="../../assets/bootstrap/js/bootstrap.min.js">
+    </script>
 </body>
 
 </html>

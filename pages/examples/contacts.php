@@ -202,8 +202,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+            <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -219,11 +218,29 @@
                     <p>Dashboard</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="../login.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Login</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../productVariable.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product Variable</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../productArray.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product Array</p>
+                  </a>
+                </li>
               </ul>
             </li>
 
             <li class="nav-item">
-              <a href="#" class="nav-link active">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
                   Tables
@@ -232,9 +249,21 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
+                  <a href="../tables/product.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="../tables/general.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>CRUD Product</p>
+                    <p>Create Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../tables/update.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Table Product</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -286,7 +315,7 @@
                 <li class="nav-item">
                   <a href="../search/enhanced.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Enhanced</p>
+                    <p>Cari Data Product</p>
                   </a>
                 </li>
               </ul>

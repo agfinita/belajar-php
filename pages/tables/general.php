@@ -13,6 +13,9 @@ include 'koneksi.php'
   <!--favicon-->
   <link rel="icon" type="image/png" href="../../assets/images/icons8-cat-64.png" />
 
+  <!-- css native -->
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+
   <!-- bootstrap -->
   <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
 
@@ -221,6 +224,24 @@ include 'koneksi.php'
                     <p>Dashboard</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="../login.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Login</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../productVariable.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product Variable</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../productArray.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product Array</p>
+                  </a>
+                </li>
               </ul>
             </li>
 
@@ -234,9 +255,21 @@ include 'koneksi.php'
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
+                  <a href="product.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="general.php" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>CRUD Product</p>
+                    <p>Create Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="update.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Table Product</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -289,7 +322,7 @@ include 'koneksi.php'
                 <li class="nav-item">
                   <a href="../search/enhanced.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Enhanced</p>
+                    <p>Cari Data Product</p>
                   </a>
                 </li>
               </ul>
@@ -337,18 +370,7 @@ include 'koneksi.php'
         $op = "";
       }
 
-      // CRUD - Delete data
-      if ($op == 'delete') {
-        $id = $_GET['id'];
-        $query6 = "DELETE FROM products WHERE id = $id";
-        $query_delete = mysqli_query($connection, $query6);
-        if ($query_delete) {
-          $success = "Data berhasil dihapus";
-        } else {
-          $error = "Data gagal dihapus";
-        }
-      }
-
+      // Menampilkan data pada input form pada saat klik button edit
       if ($op == 'edit') {
         $id = $_GET['id'];
         // SQL query untuk menampilkan data yang akan diupdate
@@ -370,9 +392,8 @@ include 'koneksi.php'
         }
       }
 
-      // CRUD - Create data
+      // Menangkap inputan yang dimasukkan user
       if (isset($_POST['simpan'])) {
-        // menangkap input dari user
         $title    = $_POST['inputTitle'];
         $category = $_POST['inputCategory'];
         $price    = $_POST['inputPrice'];
@@ -384,16 +405,17 @@ include 'koneksi.php'
         if (!empty($title) && $category && $category !== "0" && !empty($price) && !empty($desc) && !empty($disc) && !empty($unit) && !empty($stock)) {
           // CRUD - Update data
           if ($op == 'edit') {    //condition for edit data
+            // CRUD - Edit/Update Data
             // SQL query untuk mengupdate data ke table products
             $query5 = "UPDATE products SET
-            product_name    = '$title',
-            category_id     = '$category',
-            price           = '$price',
-            description     = '$desc',
-            discount_amount = '$disc',
-            unit            = '$unit',
-            stock           = '$stock'
-            WHERE id = $id";
+                        product_name    = '$title',
+                        category_id     = '$category',
+                        price           = '$price',
+                        description     = '$desc',
+                        discount_amount = '$disc',
+                        unit            = '$unit',
+                        stock           = '$stock'
+                        WHERE id = $id";
             // eksekusi data yang akan diupdate
             $query_edit     = mysqli_query($connection, $query5);
             if ($query_edit) {
@@ -401,8 +423,9 @@ include 'koneksi.php'
             } else {
               $error    = "Gagal update data";
             }
-          } else {    //condition for edit data
-            // SQL query untuk memasukkan data ke table products
+          } else {    //condition for insert data
+            // CRUD - Create data
+            // SQL query untuk insert data ke table products
             $query1 = "INSERT INTO products (
               product_name,category_id, price, description, discount_amount, unit, stock)
               VALUES 
@@ -430,7 +453,7 @@ include 'koneksi.php'
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Form Add Data Product</h3>
+                  <h3 class="card-title">Form Data Product</h3>
                 </div>
                 <!-- /.card-header -->
 
@@ -452,111 +475,54 @@ include 'koneksi.php'
                   <div class="card-body">
                     <div class="form-group">
                       <label for="inputTitle">Product Name</label>
-                      <input type="text" class="form-control" id="inputTitle" name="inputTitle" value="<?php echo $title ?>" placeholder="Enter name of product" />
+                      <input type="text" class="form-control" id="inputTitle" name="inputTitle" value="<?php echo $title ?>" placeholder="Enter name of product" autocomplete="off" />
                     </div>
 
                     <div class="form-group">
                       <label for="inputCategory">Category Product</label></br>
                       <select class="form-select" aria-label="Default select example" id="inputCategory" name="inputCategory">
-                        <option value="0"> Select Category </option>
-                        <option value="1" <?php if ($category == "1") echo "selected" ?>>Category 1</option>
-                        <option value="2" <?php if ($category == "2") echo "selected" ?>>Category 2</option>
-                        <option value="3" <?php if ($category == "3") echo "selected" ?>>Category 3</option>
+                        <option value="0" disabled> - Select Category - </option>
+                        <option value="1" <?php if ($category == "1") echo "selected" ?>>Sports</option>
+                        <option value="2" <?php if ($category == "2") echo "selected" ?>>Daily</option>
+                        <option value="3" <?php if ($category == "3") echo "selected" ?>>Accessories</option>
                       </select>
                     </div>
 
                     <div class="form-group">
                       <label for="inputPrice">Price</label>
-                      <input type="text" class="form-control" id="inputPrice" name="inputPrice" value="<?php echo $price ?>" placeholder="Enter price of product" />
+                      <input type="text" class="form-control" id="inputPrice" name="inputPrice" value="<?php echo $price ?>" placeholder="Enter price of product" autocomplete="off" />
                     </div>
 
                     <div class="form-group">
                       <label for="inputDesc">Description</label>
-                      <input type="text" class="form-control" id="inputDesc" name="inputDesc" value="<?php echo $desc ?>" placeholder="Enter description of product" />
+                      <input type="text" class="form-control" id="inputDesc" name="inputDesc" value="<?php echo $desc ?>" placeholder="Enter description of product" autocomplete="off" />
                     </div>
 
                     <div class="form-group">
                       <label for="inputDisc">Discount</label>
-                      <input type="text" class="form-control" id="inputDisc" name="inputDisc" value="<?php echo $disc ?>" placeholder="Enter discount of product" />
+                      <input type="text" class="form-control" id="inputDisc" name="inputDisc" value="<?php echo $disc ?>" placeholder="Enter discount of product" autocomplete="off" />
                     </div>
 
                     <div class="form-group">
                       <label for="inputUnit">Unit Product</label>
-                      <input type="text" class="form-control" id="inputUnit" name="inputUnit" value="<?php echo $unit ?>" placeholder="Enter unit product" />
+                      <input type="text" class="form-control" id="inputUnit" name="inputUnit" value="<?php echo $unit ?>" placeholder="Enter unit product" autocomplete="off" />
                     </div>
 
                     <div class="form-group">
                       <label for="inputStock">Stock Product</label>
-                      <input type="text" class="form-control" id="inputStock" name="inputStock" value="<?php echo $stock ?>" placeholder="Enter stock of product" />
+                      <input type="text" class="form-control" id="inputStock" name="inputStock" value="<?php echo $stock ?>" placeholder="Enter stock of product" autocomplete="off" />
                     </div>
                   </div>
                   <!-- /.card-body -->
 
                   <div class="card-footer">
                     <button type="submit" name="simpan" value="simpan" class="btn btn-success">
-                      Simpan
+                      Simpan Data
                     </button>
                   </div>
                 </form>
               </div>
               <!-- /.card -->
-
-              <!-- Table update and delete -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Edit / Delete Data Product</h3>
-                </div>
-                <!-- Start table to show product data -->
-                <table class="table table-striped">
-                  <thead>
-                    <tr class="text-center">
-                      <th scope="col">No</th>
-                      <th scope="col">Product Name</th>
-                      <th scope="col">Category</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Description</th>
-                      <th scope="col">Discount</th>
-                      <th scope="col">Unit</th>
-                      <th scope="col">Stock</th>
-                      <th scope="col">Aksi</th>
-                    </tr>
-                  </thead>
-
-                  <?php
-                  $query3 = "SELECT id, product_name, category_id, price, description, discount_amount, unit, stock FROM products ORDER BY id ASC";
-                  $query_update = mysqli_query($connection, $query3);
-                  $nomor   = 1; //inisiasi untuk memberi nomor data
-                  ?>
-
-                  <tbody>
-                    <?php while ($data = mysqli_fetch_array($query_update)) : ?>
-                      <tr class="text-center">
-                        <th scope="row"> <?php echo $nomor++ ?> </th>
-                        <td scope="row"> <?php echo $title = $data['product_name']; ?> </td>
-                        <td scope="row"> <?php echo $category  = $data['category_id']; ?> </td>
-                        <td scope="row"> <?php echo 'Rp' . $price = $data['price']; ?> </td>
-                        <td scope="row"> <?php echo $desc = $data['description']; ?> </td>
-                        <td scope="row"> <?php echo $disc  = $data['discount_amount']; ?> </td>
-                        <td scope="row"> <?php echo $unit  = $data['unit']; ?> </td>
-                        <td scope="row"> <?php echo $stock  = $data['stock']; ?> </td>
-
-                        <?php $id = $data['id'] ?>
-                        <td scope="row">
-                          <a href="general.php?op=edit&id=<?php echo $id ?>">
-                            <button type="button" class="btn btn-warning">Edit</button>
-                          </a>
-
-                          <a href="general.php?op=delete&id=<?php echo $id ?>" onclick="return confirm('Yakin hapus data?')">
-                            <button type="button" class="btn btn-danger">Delete</button>
-                          </a>
-                        </td>
-                      </tr>
-                    <?php endwhile; ?>
-                  </tbody>
-                </table>
-                <!-- End table product -->
-              </div>
-              <!-- End table update and delete -->
             </div>
             <!-- /.row -->
           </div>

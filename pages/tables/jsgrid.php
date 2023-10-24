@@ -2,122 +2,6 @@
 include 'koneksi.php'
 ?>
 
-<?php
-// create an array to list product
-$products = [
-  [
-    'image' => '../../assets/images/productImage/americanohot173.jpg',
-    'name' => 'Hot Americano',
-    'category' => '2',
-    'price' => '21.000',
-    'desc' => 'Espresso shot dalam segelas cup dengan menjaga ketebalan rasa kopinya',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/americanoiced173.jpg',
-    'name' => 'Ice Americano',
-    'category' => '2',
-    'price' => '21.000',
-    'desc' => 'Espresso shot dalam segelas cup dengan menjaga ketebalan rasa kopinya',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/classiclatteiced173.jpg',
-    'name' => 'Ice Classic Latte',
-    'category' => '2',
-    'price' => '24.000',
-    'desc' => 'Perpaduan rasa espresso premium dengan saus krim spesial fore',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/matchablended173.jpg',
-    'name' => 'Matcha Ice Blended',
-    'category' => '2',
-    'price' => '24.000',
-    'desc' => 'Perpaduan creamy matcha khas fore coffe, susu segar dengan es',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/berrymanuka-2502.jpg',
-    'name' => 'Berry Manuka Americano',
-    'category' => '2',
-    'price' => '29.000',
-    'desc' => 'Perpaduan rasa stroberry dan manuka dengan classic blend fore yang menyegarkan',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/cappuccinoiced173.jpg',
-    'name' => 'Iced Cappuccino',
-    'category' => '2',
-    'price' => '29.000',
-    'desc' => 'Paduan espresso dengan susu sapi pilihan dan foam tebal di atasnya yang menambah kelezatan rasanya',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/caramelpralinecoffee173.jpg',
-    'name' => 'Caramel Praline Coffe Ice Blended',
-    'category' => '2',
-    'price' => '33.000',
-    'desc' => 'Ice blended latte dengan saus praline dan karamel yang gurih',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/salted-caramel173.jpg',
-    'name' => 'Hot Salted Caramel Mocha',
-    'category' => '2',
-    'price' => '33.000',
-    'desc' => 'Perpaduan coklat, latte dari house blend fore dan gurihnya caramel',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/saltedcarameliced173.jpg',
-    'name' => 'Ice Salted Caramel Mocha',
-    'category' => '2',
-    'price' => '33.000',
-    'desc' => 'Perpaduan coklat, latte dari house blend fore dan gurihnya caramel yang dingin',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-
-  [
-    'image' => '../../assets/images/productImage/Nutty_Oat_Latte.jpeg',
-    'name' => 'Nutty Oat Latte',
-    'category' => '2',
-    'price' => '39.000',
-    'desc' => 'Espresso dari biji kopi khas nusantara dipadukan susu oat gluten-free dan sensasi nutty dari huzelnut',
-    'disc' => '0.0',
-    'unit' => 'PCS',
-    'stock' => '3'
-  ],
-];
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -338,6 +222,24 @@ $products = [
                     <p>Dashboard</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="../login.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Login</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../productVariable.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product Variable</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="../productArray.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product Array</p>
+                  </a>
+                </li>
               </ul>
             </li>
 
@@ -351,9 +253,21 @@ $products = [
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
+                  <a href="product.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="general.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>CRUD Product</p>
+                    <p>Create Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="update.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Table Product</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -406,7 +320,7 @@ $products = [
                 <li class="nav-item">
                   <a href="../search/enhanced.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Enhanced</p>
+                    <p>Cari Data Product</p>
                   </a>
                 </li>
               </ul>
@@ -425,14 +339,14 @@ $products = [
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Product</h1>
+              <h1>Data Product</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item">
                   <a href="#">Home</a>
                 </li>
-                <li class="breadcrumb-item active">Product</li>
+                <li class="breadcrumb-item active">Data Product</li>
               </ol>
             </div>
           </div>
@@ -451,16 +365,15 @@ $products = [
           <div>
             <!-- listing product will display in here -->
             <section class="container-fluid">
-              <section class=" mx-3 mt-5" id="product-list">
+              <section class=" mx-3 mt-4" id="product-list">
                 <section class="row row-cols-1 row-cols-md-2 g-2">
                   <!-- START CRUD - read product -->
                   <?php
-                  // variable untuk select data dari database
-                  $query2     = "SELECT product_name, category_id, price, description, discount_amount, unit, stock
-                                 FROM products ORDER BY id ASC";
+                  // Menampilkan data dari database dengan mengambil data dari table view
+                  $query2     = " SELECT * FROM view_product";
                   $query_read = mysqli_query($connection, $query2);
                   ?>
-                  <!-- menampilkan data menggunakan while loop -->
+                  <!-- Menampilkan data menggunakan while loop -->
                   <?php while ($data = mysqli_fetch_array($query_read)) : ?>
                     <section class="col">
                       <section class="card mb-3 p-2 " style="max-width: 550px;">
@@ -471,7 +384,7 @@ $products = [
                                 <image alt="opsional_picture_product" class="mb-3 img-fluid rounder-start"></image>
                               </picture><br>
                               <h5 class="card-title"><strong> <?php echo $title          = $data['product_name']; ?> </strong></h5>
-                              <p class="card-text"> <?php echo 'Category ' . $category   = $data['category_id']; ?> </p>
+                              <p class="card-text"> <?php echo 'Category ' . $category   = $data['category_name']; ?> </p>
                               <p class="card-text text-warning-emphasis"><strong> <?php echo 'Rp' . $price = $data['price']; ?> </strong></p>
                               <p class="card-text"> <?php echo $desc                     = $data['description']; ?> </p>
                               <p class="card-text"> <?php echo 'Discount: ' . $disc      = $data['discount_amount']; ?> </p>
@@ -485,32 +398,6 @@ $products = [
                     </section>
                   <?php endwhile; ?>
                   <!-- END CRUD - read product -->
-
-                  <!-- use array to load product -->
-                  <?php foreach ($products as $product) : ?>
-                    <section class="col">
-                      <section class="card mb-3 p-2 " style="max-width: 550px;">
-                        <section class="row g-0">
-                          <section class="col-md-8">
-                            <section class="card-body">
-                              <picture>
-                                <!-- image product -->
-                                <img src="<?php echo $product['image']; ?>" alt="product_image" class="mb-3 img-fluid rounder-start" alt="product-coffe">
-                              </picture>
-                              <h5 class="card-title"><strong> <?php echo $product['name']; ?> </strong></h5>
-                              <p class="card-text"> <?php echo 'Category: ' . $product['category']; ?> </p>
-                              <p class="card-text text-warning-emphasis"><strong> <?php echo 'Rp' . $product['price']; ?> </strong></p>
-                              <p class="card-text"> <?php echo $product['desc']; ?> </p>
-                              <p class="card-text"> <?php echo 'Discount: ' . $product['disc']; ?> </p>
-                              <p class="card-text"> <?php echo $product['unit']; ?> </p>
-                              <p class="card-text"> <?php echo 'Stock: ' . $product['stock']; ?> </p>
-                              <button type="button" class="btn btn-primary"> <?php echo 'Buy Now'; ?> </button>
-                            </section>
-                          </section>
-                        </section>
-                      </section>
-                    </section>
-                  <?php endforeach; ?>
                 </section>
               </section>
             </section>
