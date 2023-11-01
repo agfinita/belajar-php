@@ -1,4 +1,19 @@
 <?php
+
+// Start session
+session_start();
+
+// Check session
+if (!$_SESSION["login"] || (!isset($_SESSION["login"])) ) {
+    header("Location: login/login.php");
+    exit;
+}
+
+include '../pages/tables/functions.php';
+
+//  Get username from database and will display it on dashboard
+$username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
+
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +26,12 @@
 
     <!--favicon-->
     <link rel="icon" type="image/png" href="../assets/images/icons8-cat-64.png" />
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="../assets/fontawesome/css/all.min.css" />
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
@@ -53,6 +74,36 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <!-- Tanggal dan waktu saat mengakses web -->
+                    <?php
+                    date_default_timezone_set('Asia/Jakarta');
+                    $dateTime   = date("N d/m/Y H:i:s");
+                    //Membuat function hari waktu saat ini
+                    function tanggal_indo($dateTime)
+                    {
+                        $namaHari   = array(1 => 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu');
+                        $namaBulan  = array(1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'November', 'Desember');
+
+                        // Memisahkan hari pada $dateTime - jadi array
+                        $pisahDateTime  = explode(" ", $dateTime);
+                        // Menginisiasi index hari, tanggal dan waktu
+                        $hari           = $pisahDateTime[0];
+                        $tanggal        = $pisahDateTime[1];
+                        $jam            = $pisahDateTime[2];
+
+                        $namaHariIni    = $namaHari[$hari]; //$hari = hari ini
+                        // Memisahkan tanggal pada $tanggal
+                        $pisahDate      = explode("/", $tanggal);
+                        $tanggalHariIni = $pisahDate[0] . " " . $namaBulan[$pisahDate[1]] . " " . $pisahDate[2];
+
+                        return $namaHariIni . ", " . $tanggalHariIni . " " .  "Jam: " . $jam . " WIB";
+                    }
+                    $result = tanggal_indo($dateTime);
+                    ?>
+
+                    <a class="nav-link"> <?php echo $result ?> </a>
                 </li>
             </ul>
 
@@ -188,9 +239,10 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link">
+            <a href="login/logout.php" class="brand-link">
                 <img src="../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
-                <span class="brand-text font-weight-light">Admin Store</span>
+                <span class="brand-text font-weight-light"> Admin Store </span>
+                <span class="mx-4 mt-2"> <i class="fa-solid fa-right-from-bracket"></i> </span>
             </a>
 
             <!-- Sidebar -->
@@ -201,7 +253,7 @@
                         <img src="../assets/images/profile_2.jpg" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Agfinita Gusti Hikmawani</a>
+                        <a href="#" class="d-block"><?php echo $username; ?></a>
                     </div>
                 </div>
 
@@ -273,13 +325,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="tables/general.php" class="nav-link">
+                                    <a href="tables/create.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Create Product</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="tables/update.php" class="nav-link">
+                                    <a href="tables/read.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Table Product</p>
                                     </a>
@@ -361,6 +413,47 @@
                                     <a href="#">Home</a>
                                 </li>
                                 <li class="breadcrumb-item active">Dashboard</li>
+                                <!-- Menampilkan format waktu Jumat, 20 Oktober 2023 14:18:31 -->
+                                <?php
+                                $dateTime       = mktime(14, 18, 31, 10, 20, 2023); // 2023-10-20 14:18:31
+                                // Array hari indonesia
+                                $namaHari       = array(
+                                    'Monday'    => 'Senin',
+                                    'Tuesday'   => 'Selasa',
+                                    'Wednesday' => 'Rabu',
+                                    'Thursday'  => 'Kamis',
+                                    'Friday'    => 'Jumat',
+                                    'Saturday'  => 'Sabtu',
+                                    'Sunday'    => 'Minggu'
+                                );
+                                // Mengambil nama hari dari $dateTime
+                                $getNamaHari    = date('l', $dateTime);
+                                // Mengubah nama hari english ke indonesia
+                                $convNamaHari   = $namaHari[$getNamaHari];
+
+                                // Mengambil nama bulan dari $datetime
+                                $getNamaBulan   = date('F', $dateTime);
+                                // Array bulan indonesia
+                                $namaBulan      = array(
+                                    'January'   => 'Januari',
+                                    'February'  => 'Februari',
+                                    'March'     => 'Maret',
+                                    'April'     => 'April',
+                                    'May'       => 'Mei',
+                                    'June'      => 'Juni',
+                                    'July'      => 'Juli',
+                                    'August'    => 'Agustus',
+                                    'September' => 'September',
+                                    'October'   => 'Oktober',
+                                    'November'  => 'November',
+                                    'December'  => 'Desember'
+                                );
+                                // Mengubah nama bulan english ke indonesia
+                                $convNamaBulan  = $namaBulan[$getNamaBulan];
+
+                                $result         = $convNamaHari . ", " . date('d', $dateTime) . " " . $convNamaBulan . " " . date('Y', $dateTime) . " " . date('H:i:s', $dateTime);
+                                ?>
+                                <li class="breadcrumb-item active"> <?php echo $result; ?> </li>
                             </ol>
                         </div>
                         <!-- /.col -->
@@ -370,10 +463,6 @@
                 <!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-
-            <!-- Memanggil koneksi database -->
-            <?php include 'tables/koneksi.php'
-            ?>
 
             <?php
             // Menghitung record data tabel products
@@ -501,6 +590,9 @@
     <script src="../assets/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="../assets/dist/js/pages/dashboard.js"></script>
+
+    <!-- javascript -->
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

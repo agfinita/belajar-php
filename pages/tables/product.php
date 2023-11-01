@@ -1,8 +1,19 @@
 <?php
-include 'koneksi.php'
-?>
 
-<?php
+// Start session
+session_start();
+
+// Check session
+if (!$_SESSION["login"] || (!isset($_SESSION["login"])) ) {
+    header("Location: ../login/login.php");
+    exit;
+}
+
+include 'functions.php';
+
+//  Get username from database and will display it on dashboard
+$username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
+
 // create an array to list product
 $products = [
     [
@@ -303,7 +314,7 @@ $products = [
                         <img src="../../assets/images/profile_2.jpg" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Agfinita Gusti Hikmawani</a>
+                        <a href="#" class="d-block"><?php echo $username; ?></a>
                     </div>
                 </div>
 
@@ -375,13 +386,13 @@ $products = [
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="general.php" class="nav-link">
+                                    <a href="create.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Create Product</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="update.php" class="nav-link">
+                                    <a href="read.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Table Product</p>
                                     </a>
