@@ -14,6 +14,35 @@ include 'functions.php';
 //  Get username from database and will display it on dashboard
 $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
 
+if (isset($_POST["submit"])) {
+
+  if (create($_POST) > 0) {
+    echo  "
+            <script> 
+              alert('Data berhasil ditambahkan');
+              document.location.href  = 'read.php';
+            </script>
+          ";
+  } else {
+    echo  "
+            <script> 
+              alert('Data gagal ditambahkan');
+              document.location.href  = 'read.php';
+            </script>
+          ";
+  }
+
+}
+
+// Inisiasi variable
+$productName  = "";
+$category     = "";
+$price        = "";
+$desc         = "";
+$disc         = "";
+$unit         = "";
+$stock        = "";
+$image        = "";
 
 ?>
 
@@ -23,10 +52,16 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin | Product</title>
+  <title>Admin | CRUD Product</title>
 
   <!--favicon-->
   <link rel="icon" type="image/png" href="../../assets/images/icons8-cat-64.png" />
+
+  <!-- css native -->
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
 
   <!-- fontawesome -->
   <link rel="stylesheet" href="../../assets/fontawesome/css/all.min.css" />
@@ -35,10 +70,6 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../assets/plugins/fontawesome-free/css/all.min.css" />
-  <!-- jsGrid -->
-  <link rel="stylesheet" href="../../assets/plugins/jsgrid/jsgrid.min.css" />
-  <link rel="stylesheet" href="../../assets/plugins/jsgrid/jsgrid-theme.min.css" />
-  <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
   <!-- Theme style -->
   <link rel="stylesheet" href="../../assets/dist/css/adminlte.min.css" />
 </head>
@@ -278,7 +309,7 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="create.php" class="nav-link">
+                  <a href="create.php" class="nav-link active">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Create Product</p>
                   </a>
@@ -290,7 +321,7 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="jsgrid.php" class="nav-link active">
+                  <a href="jsgrid.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Data Product</p>
                   </a>
@@ -358,14 +389,12 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Data Product</h1>
+              <h1>Product Data</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                  <a href="#">Home</a>
-                </li>
-                <li class="breadcrumb-item active">Data Product</li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Tambah Data</li>
               </ol>
             </div>
           </div>
@@ -373,70 +402,89 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
         <!-- /.container-fluid -->
       </section>
 
+
+
       <!-- Main content -->
       <section class="content">
-        <div class="card card-blue">
-          <div class="card-header">
-            <h3 class="card-title">Products</h3>
-          </div>
-          <!-- /.card-header -->
+        <div class="container-fluid">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Form Tambah Data</h3>
+                </div>
+                <!-- /.card-header -->
 
-          <div>
-            <!-- listing product will display in here -->
-            <section class="container-fluid">
-              <section class=" mx-3 mt-4" id="product-list">
-                <section class="row row-cols-1 row-cols-md-2 g-2">
-                  <!-- START CRUD - read product -->
-                  <?php
-                  // Menampilkan data dari database dengan mengambil data dari table view
-                  $query2     = " SELECT * FROM view_product2";
-                  $query_read = mysqli_query($connection, $query2);
-                  ?>
+                <!-- form start -->
+                <form action="" method="POST" enctype="multipart/form-data">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="name">Product Name</label>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="Enter name of product" autocomplete="off" />
+                    </div>
 
-                  <!-- Menampilkan data menggunakan while loop -->
-                  <?php while ($data = mysqli_fetch_array($query_read)) : ?>
-                    <section class="col">
-                      <section class="card mb-3 p-2 " style="max-width: 550px;">
-                        <section class="row g-0">
-                          <section class="col-md-8">
-                            <section class="card-body">
-                              <?php
-                                $image  = $data['image'];
-                                $images = $image? explode(" ", $image) : [$image];
-                                
-                                foreach ($images as $img) :
-                              ?> 
-                              <picture class="mx-auto d-inline">
-                                <?php $imagePath  = '../../assets/images/product/' . $img; ?>
-                                <img src="<?php echo $imagePath; ?>" class="mb-3 img-fluid rounder-start" alt="gambar" />
-                              </picture><br>
-                              <?php endforeach; ?>
-                              <h5 class="card-title"><strong> <?php echo $title          = $data['product_name']; ?> </strong></h5>
-                              <p class="card-text"> <?php echo 'Category ' . $category   = $data['category_name']; ?> </p>
-                              <p class="card-text text-warning-emphasis"><strong> <?php echo 'Rp' . $price = $data['price']; ?> </strong></p>
-                              <p class="card-text"> <?php echo $desc                     = $data['description']; ?> </p>
-                              <p class="card-text"> <?php echo 'Discount: ' . $disc      = $data['discount_amount']; ?> </p>
-                              <p class="card-text"> <?php echo $unit                     = $data['unit']; ?> </p>
-                              <p class="card-text"> <?php echo 'Stock: ' . $stock        = $data['stock']; ?> </p>
-                              <button type="button" class="btn btn-primary"> <?php echo 'Buy Now'; ?> </button>
-                            </section>
-                          </section>
-                        </section>
-                      </section>
-                    </section>
-                  <?php endwhile; ?>
-                  <!-- END CRUD - read product -->
-                </section>
-              </section>
-            </section>
+                    <div class="form-group">
+                      <label for="category">Category Product</label></br>
+                      <select class="form-select" aria-label="Default select example" id="category" name="category">
+                        <option value="0" disabled> - Select Category - </option>
+                        <option value="1" <?php if ($category == "1") echo "selected" ?>>Sports</option>
+                        <option value="2" <?php if ($category == "2") echo "selected" ?>>Daily</option>
+                        <option value="3" <?php if ($category == "3") echo "selected" ?>>Accessories</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="price">Price</label>
+                      <input type="text" class="form-control" id="price" name="price" placeholder="Enter price of product" autocomplete="off" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="desc">Description</label>
+                      <input type="text" class="form-control" id="desc" name="desc" placeholder="Enter description of product" autocomplete="off" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="disc">Discount</label>
+                      <input type="text" class="form-control" id="disc" name="disc" placeholder="Enter discount of product" autocomplete="off" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="unit">Unit Product</label>
+                      <input type="text" class="form-control" id="unit" name="unit" placeholder="Enter unit product" autocomplete="off" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="stock">Stock Product</label>
+                      <input type="text" class="form-control" id="stock" name="stock" placeholder="Enter stock of product" autocomplete="off" />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="image">Image Product</label>
+                      <input type="file" class="form-control" id="image" name="image[]" multiple />
+                      
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button type="submit" name="submit" class="btn btn-success">
+                      Tambah Data
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.row -->
           </div>
-        </div>
-        <!-- /.card -->
+          <!-- /.container-fluid -->
       </section>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
+    <footer class=" main-footer">
       <div class="float-right d-none d-sm-block"><b>Version</b> 3.2.0</div>
       <strong>Copyright &copy; 2014-2021
         <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
@@ -455,16 +503,21 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
   <script src="../../assets/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- jsGrid -->
-  <script src="../../assets/plugins/jsgrid/demos/db.js"></script>
-  <script src="../../assets/plugins/jsgrid/jsgrid.min.js"></script>
+  <!-- bs-custom-file-input -->
+  <script src="../../assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../assets/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../assets/dist/js/demo.js"></script>
   <!-- Page specific script -->
-  <script src="../../assets/bootstrap/js/bootstrap.min.js">
+  <script>
+    $(function() {
+      bsCustomFileInput.init();
+    });
   </script>
+
+  <!-- javascript -->
+  <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
