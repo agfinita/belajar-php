@@ -2,3 +2,7 @@ label::after {
     content: "*";
     color: red;
 }
+
+.posisi {
+    display: block;
+}
