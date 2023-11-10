@@ -16,22 +16,26 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
 
 // Get data id from URL
 $id = $_GET["id"];
-$queryEdit    = (" SELECT
-                    id,
-                    product_name, 
-                    category_id, 
-                    price, 
-                    description, 
-                    discount_amount, 
-                    unit, 
-                    stock, 
-                    image
-                    FROM products WHERE id = $id ");
-$dataProduct  = edit_query($queryEdit);
+
+// Instansiasi class EditProduct
+$updateProduct  = new EditProduct($dbConn);
+
+$dataProduct  = $updateProduct->edit_query  (" SELECT
+                                                    id,
+                                                    product_name, 
+                                                    category_id, 
+                                                    price, 
+                                                    description, 
+                                                    discount_amount, 
+                                                    unit, 
+                                                    stock, 
+                                                    image
+                                                FROM products WHERE id = $id
+                                            " );
 
 if (isset($_POST["submit"])) {
-
-    if (edit($_POST) > 0) {
+    // Panggil method update dari class EditProduct
+    if ($updateProduct->update($_POST) > 0) {
         echo  "
             <script> 
                 alert('Data berhasil diupdate');

@@ -4,7 +4,7 @@
 session_start();
 
 // Check session
-if (!$_SESSION["login"] || (!isset($_SESSION["login"])) ) {
+if ( !$_SESSION["login"]    || (!isset($_SESSION["login"])) ) {
     header("Location: login/login.php");
     exit;
 }
@@ -56,7 +56,8 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
+    
+<div class="wrapper">
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="../assets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
@@ -467,18 +468,18 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
             <?php
             // Menghitung record data tabel products
             $query_product  = "SELECT COUNT(*) AS product_count FROM products ";
-            $productCount   = mysqli_query($connection, $query_product);
-            $productCount   = mysqli_fetch_assoc($productCount);
+            $productResult  = mysqli_query($dbConn->getKoneksi(), $query_product);
+            $productCount   = mysqli_fetch_assoc($productResult);
 
             // Menghitung record data tabel users
             $query_users    = "SELECT COUNT(*) AS users_count FROM users ";
-            $usersCount     = mysqli_query($connection, $query_users);
-            $usersCount     = mysqli_fetch_assoc($usersCount);
+            $usersResult    = mysqli_query($dbConn->getKoneksi(), $query_users);
+            $usersCount     = mysqli_fetch_assoc($usersResult);
 
             // Menghitung record data tabel vendors
             $query_vendors  = " SELECT COUNT(*) AS vendors_count FROM vendors ";
-            $vendorsCount   = mysqli_query($connection, $query_vendors);
-            $vendorsCount   = mysqli_fetch_assoc($vendorsCount);
+            $vendorsResult  = mysqli_query($dbConn->getKoneksi(), $query_vendors);
+            $vendorsCount   = mysqli_fetch_assoc($vendorsResult);
             ?>
 
             <!-- Main content -->

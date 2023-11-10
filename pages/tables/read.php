@@ -14,59 +14,17 @@ include 'functions.php';
 //  Get username from database and will display it on dashboard
 $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
 
-$product    =   query (
-                    "   SELECT
-                            p.id,
-                            p.product_name,
-                            pc.category_name,
-                            p.price,
-                            p.description,
-                            p.discount_amount,
-                            p.unit,
-                            p.stock,
-                            p.image
-                        FROM products p
-                        INNER JOIN product_categories pc ON p.category_id = pc.id
-                        ORDER BY p.id ASC "
-                );
+// Show product
+$getProduct = new GetProduct($dbConn);
+$product    = $getProduct->showProduct();
 
 // Pagination
 $dataPerHal = 10;
-$query      = " SELECT
-                    id, 
-                    product_name, 
-                    category_id, 
-                    price, 
-                    description, 
-                    discount_amount, 
-                    unit, 
-                    stock, 
-                    image
-                FROM products";
-$result     = mysqli_query($connection, $query);
-$totalData  = mysqli_num_rows($result);         // Variable menyimpan total data pada data product
-$pageTotal  = ceil($totalData / $dataPerHal);  // Variable untuk mengetahui total halaman
+$pagination = new Pagination($dbConn, $dataPerHal);
 
-$halAktif   = (isset($_GET["page"]) ) ? $_GET["page"] : 1;
-$dataTampil = ($dataPerHal * $halAktif) - $dataPerHal;  // Data awal yang tampil dari index ke-
-
-$product    = query (
-                "   SELECT
-                        p.id,
-                        p.product_name,
-                        pc.category_name,
-                        p.price,
-                        p.description,
-                        p.discount_amount,
-                        p.unit,
-                        p.stock,
-                        p.image
-                    FROM products p
-                    INNER JOIN product_categories pc ON p.category_id = pc.id
-                    ORDER BY p.id ASC
-                    LIMIT $dataTampil, $dataPerHal"
-                );
-
+$totalHalaman   = $pagination->hitungTotalHalaman();
+$halAktif       = $pagination->getHalamanAktif();
+$product        = $pagination->ambilDataProduk();
 ?>
 
 <!DOCTYPE html>
@@ -512,7 +470,7 @@ $product    = query (
                                             </li>
                                         <?php endif; ?>
                                         <!-- Pages buttons -->
-                                        <?php for ($i = 1; $i <= $pageTotal; $i++) { ?>
+                                        <?php for ($i = 1; $i <= $totalHalaman; $i++) { ?>
                                             <?php if ($i == $halAktif) : ?>
                                                 <li class="page-item active" aria-current="page">
                                                     <a class="page-link" href="?page=<?php echo $i ?>"><?php echo $i ?></a>
@@ -524,7 +482,7 @@ $product    = query (
                                             <?php endif; ?>
                                         <?php } ?>
                                         <!-- Next button -->
-                                        <?php if ($halAktif < $pageTotal) : ?>
+                                        <?php if ($halAktif < $totalHalaman) : ?>
                                             <li class="page-item">
                                                 <a class="page-link" href="?page=<?php echo $halAktif + 1 ?>">Next</a>
                                             </li>

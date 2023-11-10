@@ -386,45 +386,46 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
             <section class="container-fluid">
               <section class=" mx-3 mt-4" id="product-list">
                 <section class="row row-cols-1 row-cols-md-2 g-2">
-                  <!-- START CRUD - read product -->
+                  <!-- START display data product -->
                   <?php
-                  // Menampilkan data dari database dengan mengambil data dari table view
-                  $query2     = " SELECT * FROM view_product2";
-                  $query_read = mysqli_query($connection, $query2);
+                  $displayProduct = new TampilProduk($dbConn);
+                  $products        = $displayProduct->display();
                   ?>
 
                   <!-- Menampilkan data menggunakan while loop -->
-                  <?php while ($data = mysqli_fetch_array($query_read)) : ?>
+                  <?php foreach ($products as $p)  : ?>
                     <section class="col">
                       <section class="card mb-3 p-2 " style="max-width: 550px;">
                         <section class="row g-0">
                           <section class="col-md-8">
                             <section class="card-body">
+
                               <?php
-                                $image  = $data['image'];
-                                $images = $image? explode(" ", $image) : [$image];
+                                $image  = $p['images'];
                                 
-                                foreach ($images as $img) :
+                                foreach ($image as $img) :
                               ?> 
+
                               <picture class="mx-auto d-inline">
                                 <?php $imagePath  = '../../assets/images/product/' . $img; ?>
                                 <img src="<?php echo $imagePath; ?>" class="mb-3 img-fluid rounder-start" alt="gambar" />
                               </picture><br>
                               <?php endforeach; ?>
-                              <h5 class="card-title"><strong> <?php echo $title          = $data['product_name']; ?> </strong></h5>
-                              <p class="card-text"> <?php echo 'Category ' . $category   = $data['category_name']; ?> </p>
-                              <p class="card-text text-warning-emphasis"><strong> <?php echo 'Rp' . $price = $data['price']; ?> </strong></p>
-                              <p class="card-text"> <?php echo $desc                     = $data['description']; ?> </p>
-                              <p class="card-text"> <?php echo 'Discount: ' . $disc      = $data['discount_amount']; ?> </p>
-                              <p class="card-text"> <?php echo $unit                     = $data['unit']; ?> </p>
-                              <p class="card-text"> <?php echo 'Stock: ' . $stock        = $data['stock']; ?> </p>
+
+                              <h5 class="card-title"><strong> <?php echo $title = $p['title']; ?> </strong> </h5>
+                              <p class="card-text"> <?php echo $category  = $p['category']; ?> </p>
+                              <p class="card-text text-warning-emphasis"><strong> <?php echo $price = $p['price']; ?> </strong></p>
+                              <p class="card-text"> <?php echo $desc  = $p['description']; ?> </p>
+                              <p class="card-text"> <?php echo $disc  = $p['discount']; ?> </p>
+                              <p class="card-text"> <?php echo $unit  = $p['unit']; ?> </p>
+                              <p class="card-text"> <?php echo $stock = $p['stock']; ?> </p>
                               <button type="button" class="btn btn-primary"> <?php echo 'Buy Now'; ?> </button>
                             </section>
                           </section>
                         </section>
                       </section>
                     </section>
-                  <?php endwhile; ?>
+                  <?php endforeach; ?>
                   <!-- END CRUD - read product -->
                 </section>
               </section>

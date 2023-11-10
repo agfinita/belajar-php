@@ -14,9 +14,12 @@ include 'functions.php';
 //  Get username from database and will display it on dashboard
 $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
 
+// Instansiasi class AddProduct
+$addProduct = new AddProduct($dbConn);
+
 if (isset($_POST["submit"])) {
 
-  if (create($_POST) > 0) {
+  if ($addProduct->tambahProduk($_POST) > 0) {
     echo  "
             <script> 
               alert('Data berhasil ditambahkan');
@@ -401,8 +404,6 @@ $image        = "";
         </div>
         <!-- /.container-fluid -->
       </section>
-
-
 
       <!-- Main content -->
       <section class="content">

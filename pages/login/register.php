@@ -2,15 +2,27 @@
 include '../tables/functions.php';
 
 if (isset($_POST["register"])) {
+  // Membuat objek User dengan objek koneksi database $dbConn
+  $user = new User($dbConn);
 
-  if (daftar($_POST) > 0) {
-    echo " <script>
-                alert('Berhasil membuat akun baru!');
-                document.location.href = 'login.php';
-            </script>";
-    exit;
+  // Get data from form registration
+  $name     = $_POST["name"];
+  $email    = $_POST["email"];
+  $phone    = $_POST["phone"];
+  $username = $_POST["phone"];
+  $password = $_POST["password"];
+
+  // Call registration method
+  $result = $user->registrasi($name, $email, $phone, $username, $password);
+
+  if ($result == true) {
+    echo "<script>
+            alert('Berhasil membuat akun baru!');
+            document.location.href = 'login.php';
+        </script>";
+        exit;
   } else {
-    $error = " ";
+    $error = $result;
   }
 
 }
@@ -59,7 +71,9 @@ if (isset($_POST["register"])) {
 
         <?php
           if (!empty($error)) {
-              echo ' <div class="alert alert-danger" role="alert"> Lengkapi semua data! </div> ';
+              echo '<div class="alert alert-danger" role="alert">
+                          Lengkapi semua data!
+                    </div> ';
           }
         ?>
 

@@ -2,41 +2,25 @@
 // Memulai session
 session_start();
 
-include '../tables/functions.php';
-
-// If isset session
 if (isset($_SESSION["login"])) {
   header("Location: ../dashboard.php");
-  exit;
 }
 
+include '../tables/functions.php';
+
 if (isset($_POST["login"])) {
+  // Membuat objek login dengan object koneksi database $dbConn
+  $login  = new Login($dbConn);
 
   // Get input from user
   $username   = isset($_POST["username"]) ? $_POST["username"] : " ";
   $password   = $_POST["password"];
 
-  if (!empty($username)) {
-    // Check username match with data in db
-    $query     = " SELECT * FROM users WHERE username  = $username ";
-    $result    = mysqli_query($connection, $query);
+  $result     = $login->loginUser($username, $password);
 
-    if (mysqli_num_rows($result) === 1) {
-
-      // Check password based username
-      $row    = mysqli_fetch_assoc($result);
-
-      if (password_verify($password, $row["password"])) {
-        // Set session
-        $_SESSION["login"] = true;
-        $_SESSION["name"]  = $row["name"];
-        
-        header("Location: ../dashboard.php");
-        exit;
-      }
-    }
+  if ($result !== true) {
+    $error  = " ";
   }
-  $error = " ";
 }
 
 ?>
