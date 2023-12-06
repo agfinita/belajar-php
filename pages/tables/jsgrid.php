@@ -389,7 +389,7 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
                   <!-- START display data product -->
                   <?php
                   $displayProduct = new TampilProduk($dbConn);
-                  $products        = $displayProduct->display();
+                  $products       = $displayProduct->display();
                   ?>
 
                   <!-- Menampilkan data menggunakan while loop -->

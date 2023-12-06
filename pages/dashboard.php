@@ -82,8 +82,7 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
                     date_default_timezone_set('Asia/Jakarta');
                     $dateTime   = date("N d/m/Y H:i:s");
                     //Membuat function hari waktu saat ini
-                    function tanggal_indo($dateTime)
-                    {
+                    function tanggal_indo($dateTime) {
                         $namaHari   = array(1 => 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu');
                         $namaBulan  = array(1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'November', 'Desember');
 
@@ -97,6 +96,7 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
                         $namaHariIni    = $namaHari[$hari]; //$hari = hari ini
                         // Memisahkan tanggal pada $tanggal
                         $pisahDate      = explode("/", $tanggal);
+                        var_dump($pisahDate);
                         $tanggalHariIni = $pisahDate[0] . " " . $namaBulan[$pisahDate[1]] . " " . $pisahDate[2];
 
                         return $namaHariIni . ", " . $tanggalHariIni . " " .  "Jam: " . $jam . " WIB";

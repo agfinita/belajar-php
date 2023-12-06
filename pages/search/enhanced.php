@@ -347,23 +347,18 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
     </aside>
 
     <?php
-    // Menampilkan data dari database
-    $query2     = " SELECT product_name, category_id, price, description, discount_amount, unit, stock, image
-                    FROM products ORDER BY id DESC";
-    $query_read = mysqli_query($connection, $query2);
+    // Menggunakan class CariProduct untuk pencarian
+    $search = new CariProduct($dbConn);
 
     //  Feat searching
     if (isset($_GET['searchButton'])) {
-      $keyword    = ($_GET['inputKeyword']);
-      $query_cari = "SELECT product_name, category_id, price, description, discount_amount, unit, stock, image
-                                    FROM products WHERE
-                                    product_name LIKE '%$keyword%' OR
-                                    category_id LIKE '%$keyword%' OR
-                                    description LIKE '%$keyword%' ";
-      $query_read     = mysqli_query($connection, $query_cari);
+      $keyword = ($_GET['inputKeyword']);
+      $products = $search->search($keyword);
     } else {
-      // default apabila tidak ada data yang dicari
-      $query_read     = mysqli_query($connection, $query2);
+      // default jika tidak ada data yang dicari
+      // misalnya, tampilkan semua produk jika tidak ada kata kunci pencarian
+      $tampilkan_produk = new TampilProduk($dbConn);
+      $products = $tampilkan_produk->display();
     }
     ?>
 
@@ -425,32 +420,48 @@ $username   = isset($_SESSION["name"]) ? $_SESSION["name"] : "User";
           <section class="container-fluid">
             <section class=" mx-3 mt-4" id="product-list">
               <section class="row row-cols-1 row-cols-md-2 g-2">
+              <?php
+                  if (empty($products)) {
+                    echo $error = '<div class="text-center pb-3 mx-auto my-auto" role="alert"> Data tidak ditemukan. </div>';
+                  }
+              ?>
 
                 <!-- START CRUD - read product -->
-                <?php while ($data = mysqli_fetch_array($query_read)) : ?> <!-- Menampilkan data menggunakan while loop -->
-
+                <?php foreach ($products as $product) : ?>
                   <section class="col">
                     <section class="card mb-3 p-2 " style="max-width: 550px;">
                       <section class="row g-0">
                         <section class="col-md-8">
                           <section class="card-body">
-                            <picture>
-                                <img src="../../assets/images/product/<?php echo $image = $data['image']; ?>" class="mb-3 img-fluid rounder-start" alt="gambar" />
-                            </picture><br>
-                            <h5 class="card-title"><strong> <?php echo $title          = $data['product_name']; ?> </strong></h5>
-                            <p class="card-text"> <?php echo 'Category ' . $category   = $data['category_id']; ?> </p>
-                            <p class="card-text text-warning-emphasis"><strong> <?php echo 'Rp' . $price = $data['price']; ?> </strong></p>
-                            <p class="card-text"> <?php echo $desc                     = $data['description']; ?> </p>
-                            <p class="card-text"> <?php echo 'Discount: ' . $disc      = $data['discount_amount']; ?> </p>
-                            <p class="card-text"> <?php echo $unit                     = $data['unit']; ?> </p>
-                            <p class="card-text"> <?php echo 'Stock: ' . $stock        = $data['stock']; ?> </p>
+                          <?php 
+                          $image = $product['images'];
+                              if (is_string($image)) {
+                                  $images = explode(" ", $image);
+                              } else {
+                                $images = (array)$image; // Jika sudah dalam bentuk array
+                              }
+                              
+                              foreach ($images as $img) : ?>
+                                <picture>
+                                    <?php $imagePath    = '../../assets/images/product/' . $img; ?>
+                                    <img src="<?php echo $imagePath ?>" class="mb-3 img-fluid rounder-start" alt="gambar" />
+                                </picture><br>
+                          <?php endforeach; ?>
+
+                            <h5 class="card-title"><strong> <?php echo $title = $product['title']; ?> </strong></h5>
+                            <p class="card-text"> <?php echo $category  = $product['category']; ?> </p>
+                            <p class="card-text text-warning-emphasis"><strong> <?php echo $productrice = $product['price']; ?> </strong></p>
+                            <p class="card-text"> <?php echo $desc  = $product['description']; ?> </p>
+                            <p class="card-text"> <?php echo $disc  = $product['discount']; ?> </p>
+                            <p class="card-text"> <?php echo $unit  = $product['unit']; ?> </p>
+                            <p class="card-text"> <?php echo $stock = $product['stock']; ?> </p>
                             <button type="button" class="btn btn-primary"> <?php echo 'Buy Now'; ?> </button>
                           </section>
                         </section>
                       </section>
                     </section>
                   </section>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
                 <!-- END CRUD - read product -->
               </section>
             </section>

@@ -408,3 +408,39 @@ class DeleteProduct {
         //return mysqli_affected_rows($this->koneksi);
     }
 }
+
+// Search product
+class CariProduct {
+    private $koneksi;
+
+    public function __construct($db) {
+        $this->koneksi = $db->getKoneksi();
+    }
+
+    public function search($keyword) {
+        $query_cari = " SELECT product_name, category_id, price, description, discount_amount, unit, stock, image
+                        FROM products WHERE
+                            product_name LIKE '%$keyword%' OR
+                            category_id LIKE '%$keyword%' OR
+                            description LIKE '%$keyword%' ";
+        $result     = mysqli_query($this->koneksi, $query_cari);
+
+        $products = [];
+        while($data = mysqli_fetch_array($result)) {
+            // Format data yang ditemukan sesuai kebutuhan tampilan
+            $product = [
+                'title'         => $data['product_name'],
+                'category'      => 'Category ' . $data['category_id'],
+                'price'         => 'Rp ' . $data['price'],
+                'description'   => $data['description'],
+                'discount'      => 'Discount: ' . $data['discount_amount'],
+                'unit'          => $data['unit'],
+                'stock'         => 'Stock:  ' . $data['stock'],
+                'images'        => explode(" ", $data['image']),
+            ];
+
+            $products[] = $product;
+        }
+        return $products;
+    }
+}
